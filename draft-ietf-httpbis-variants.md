@@ -339,6 +339,45 @@ Variant-Key: fr, gzip
 
 it could be used to satisfy the first preference. If not, responses corresponding to the other keys could be returned, or the request could be forwarded towards the origin.
 
+### A Variant Missing From the Cache
+
+If the selected `variants-header` was:
+
+~~~ example
+Variants: Accept-Language;en;fr;de
+~~~
+
+And a request comes in with the following headers:
+
+~~~ example
+Accept-Language: de;q=1.0, es;q=0.8
+~~~
+
+Then the `sorted-variants` in {{cache}}{:format="title"} is:
+
+~~~ example
+[
+  ["de", "en"]         // prefers French, will accept English(?)
+]
+~~~
+
+{{cache}}{:format="title"} returns:
+
+~~~ example
+[
+  'de',
+  'en'
+]
+~~~
+
+If the cache contains responses with the following Variant-Keys:
+
+~~~ example
+Variant-Key: fr
+Variant-Key: en
+~~~
+
+Then the cache has the option of returning the `Variant-Key: en` result even though the origin server offered an exact match to the client's request, `Variant-Key: de`.
 
 # Origin Server Behaviour {#origin}
 
