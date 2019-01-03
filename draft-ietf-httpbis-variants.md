@@ -357,7 +357,7 @@ Then the `sorted-variants` in {{cache}}{:format="title"} is:
 
 ~~~ example
 [
-  ["de", "en"]         // prefers French, will accept English(?)
+  ["de", "en"]         // prefers German, will accept English(?)
 ]
 ~~~
 
